@@ -11,6 +11,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("employee");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -25,7 +26,15 @@ export default function Login() {
 
       if (email && password) {
         // Store user info in localStorage for demo
-        localStorage.setItem("user", JSON.stringify({ email, name: "John Doe" }));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email,
+            name: "John Doe",
+            role: selectedRole,
+            department: "Engineering",
+          })
+        );
         localStorage.setItem("isLoggedIn", "true");
         navigate("/dashboard");
       } else {
@@ -76,6 +85,24 @@ export default function Login() {
                   className="h-11 border-gray-200"
                   disabled={isLoading}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="role" className="text-gray-700 font-medium">
+                  Role (Demo)
+                </Label>
+                <select
+                  id="role"
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                  className="w-full h-11 px-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+                  disabled={isLoading}
+                >
+                  <option value="employee">Employee</option>
+                  <option value="team_leader">Team Leader</option>
+                  <option value="hr">HR</option>
+                  <option value="director">Director</option>
+                </select>
               </div>
 
               <div className="space-y-2">

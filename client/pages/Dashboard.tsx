@@ -112,7 +112,18 @@ export default function Dashboard() {
     if (!isLoggedIn || !userInfo) {
       navigate("/login");
     } else {
-      setUser(JSON.parse(userInfo));
+      const userData = JSON.parse(userInfo);
+
+      // Route to appropriate dashboard based on role
+      if (userData.role === "director") {
+        navigate("/director-dashboard");
+      } else if (userData.role === "hr") {
+        navigate("/hr-dashboard");
+      } else if (userData.role === "team_leader") {
+        navigate("/team-leader-dashboard");
+      }
+
+      setUser(userData);
     }
   }, [navigate]);
 

@@ -14,6 +14,7 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
     department: "",
+    role: "employee",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -55,6 +56,7 @@ export default function Signup() {
             email: formData.email,
             name: formData.fullName,
             department: formData.department,
+            role: formData.role,
           })
         );
         localStorage.setItem("isLoggedIn", "true");
@@ -134,6 +136,25 @@ export default function Signup() {
                   className="h-11 border-gray-200"
                   disabled={isLoading}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="role" className="text-gray-700 font-medium">
+                  Role
+                </Label>
+                <select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="w-full h-11 px-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+                  disabled={isLoading}
+                >
+                  <option value="employee">Employee</option>
+                  <option value="team_leader">Team Leader</option>
+                  <option value="hr">HR</option>
+                  <option value="director">Director</option>
+                </select>
               </div>
 
               <div className="space-y-2">
