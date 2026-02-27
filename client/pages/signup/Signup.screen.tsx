@@ -19,12 +19,12 @@ const SignupScreen = () => {
   return (
     <div className="min-h-[100dvh] bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 flex items-center justify-center relative overflow-hidden p-4 md:p-6 lg:p-4 font-Inter font-sans-serif">
       <div
-        className="absolute inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0 opacity-100 dark:opacity-40"
         aria-hidden="true"
       >
-        <div className="absolute -top-28 -right-24 w-[500px] h-[500px] rounded-full bg-primary/[0.12] blur-[80px] animate-float" />
-        <div className="absolute -bottom-24 -left-20 w-[400px] h-[400px] rounded-full bg-secondary/[0.12] blur-[80px] animate-float-slow" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full bg-accent/[0.12] blur-[80px] animate-float-mid" />
+        <div className="absolute -top-28 -right-24 w-[500px] h-[500px] rounded-full bg-primary/[0.12] dark:bg-primary/[0.2] blur-[80px] animate-float" />
+        <div className="absolute -bottom-24 -left-20 w-[400px] h-[400px] rounded-full bg-secondary/[0.12] dark:bg-secondary/[0.2] blur-[80px] animate-float-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full bg-accent/[0.12] dark:bg-accent/[0.2] blur-[80px] animate-float-mid" />
       </div>
 
       <div className="relative z-10 flex w-full max-w-[1000px] min-h-[600px] lg:min-h-[640px] xl:max-w-[1100px] xl:min-h-[700px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(72,93,170,0.12)] animate-fade-up">
@@ -85,7 +85,7 @@ const SignupScreen = () => {
         </div>
 
         {/* Right Side - Form */}
-        <div className="flex-1 bg-white/85 backdrop-blur-2xl flex items-center justify-center p-6 lg:p-8">
+        <div className="flex-1 bg-white/85 dark:bg-background/85 backdrop-blur-2xl flex items-center justify-center p-6 lg:p-8">
           <div className="w-full max-w-[400px] flex flex-col gap-6">
             <div className="flex md:hidden items-center justify-center gap-2.5">
               <div className="w-9 h-9 bg-primary rounded-[10px] flex items-center justify-center">
@@ -96,7 +96,7 @@ const SignupScreen = () => {
               </span>
             </div>
 
-            <div className="bg-white rounded-[20px] p-6 sm:p-7 shadow-[0_8px_32px_rgba(99,69,237,0.08)] border border-black/[0.04] flex flex-col gap-4 sm:gap-4">
+            <div className="bg-white dark:bg-card rounded-[20px] p-6 sm:p-7 shadow-[0_8px_32px_rgba(99,69,237,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] border border-black/[0.04] dark:border-white/[0.04] flex flex-col gap-4 sm:gap-4">
               <div className="flex flex-col gap-1">
                 <button
                   onClick={() => navigate("/login")}
@@ -133,7 +133,7 @@ const SignupScreen = () => {
                 <button
                   type="button"
                   onClick={() => navigate("/login")}
-                  className="text-[#485DAA] font-semibold hover:opacity-80 hover:underline transition-opacity"
+                  className="text-primary font-semibold hover:opacity-80 hover:underline transition-opacity"
                 >
                   {t("common:signIn")}
                 </button>

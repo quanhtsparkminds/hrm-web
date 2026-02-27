@@ -20,33 +20,42 @@ import LoginScreen from "./pages/login/Login.screen";
 import SignupScreen from "./pages/signup/Signup.screen";
 import DirectorScreen from "./pages/dashboard/director/Director.screen";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Loading />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <RouteLoader />
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/signup" element={<SignupScreen />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/director-dashboard" element={<DirectorScreen />} />
-            <Route path="/hr-dashboard" element={<HRDashboard />} />
-            <Route
-              path="/team-leader-dashboard"
-              element={<TeamLeaderDashboard />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <TooltipProvider>
+          <Loading />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <RouteLoader />
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/director-dashboard" element={<DirectorScreen />} />
+              <Route path="/hr-dashboard" element={<HRDashboard />} />
+              <Route
+                path="/team-leader-dashboard"
+                element={<TeamLeaderDashboard />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   </Provider>
 );

@@ -14,5 +14,8 @@
     "logoutConfirmMessage": "Are you sure you want to log out of the system?",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "language": "Language",
+    "english": "English",
+    "vietnamese": "Vietnamese",
     "copyright": "© {{year}} HRM System. All rights reserved."
 }

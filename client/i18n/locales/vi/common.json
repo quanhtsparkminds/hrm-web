@@ -14,5 +14,8 @@
     "logoutConfirmMessage": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?",
     "cancel": "Hủy",
     "confirm": "Xác nhận",
+    "language": "Ngôn ngữ",
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt",
     "copyright": "© {{year}} Hệ thống HRM. Bảo lưu mọi quyền."
 }
