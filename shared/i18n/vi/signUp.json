@@ -1,0 +1,15 @@
+{
+  "title": "Đăng ký",
+  "description": "Tạo tài khoản của bạn để bắt đầu",
+  "countryDetailsTitle": "Chi tiết Quốc gia",
+  "countryDetailsDescription": "Chúng tôi cần thông tin này để xác minh danh tính của bạn và đảm bảo tài khoản của bạn tuân thủ các yêu cầu tuân thủ toàn cầu.",
+  "citizenshipTitle": "Quốc tịch",
+  "citizenshipSubtitle": "Chọn quốc gia cấp hộ chiếu hoặc giấy tờ tùy thân của bạn.",
+  "residenceTitle": "Quốc gia Cư trú",
+  "residenceSubtitle": "Chọn quốc gia nơi bạn hiện đang sinh sống hoặc nộp thuế.",
+  "personalInfoTitle": "Nhập Thông tin Cá nhân",
+  "personalInfoDescription": "Cung cấp họ tên đầy đủ, email và tạo mật khẩu an toàn.",
+  "otpInfo": "4X Club là công ty thành viên tư nhân, không phải là sản phẩm đầu tư công cộng.",
+  "otpTitle": "Nhập Mã lời mời của bạn",
+  "otpSubtitle": "Quyền truy cập vào 4X Club chỉ dành cho những người được mời"
+}

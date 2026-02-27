@@ -1,0 +1,9 @@
+{
+    "accountInactive": "Account is inactive. Please contact administrator.",
+    "invalidCredentials": "Invalid username or password.",
+    "emailExists": "Email already exists.",
+    "usernameExists": "Username already exists.",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "unexpectedError": "An unexpected error occurred. Please try again later.",
+    "somethingWentWrong": "Something went wrong"
+}

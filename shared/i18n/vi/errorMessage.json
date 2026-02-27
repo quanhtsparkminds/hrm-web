@@ -1,0 +1,6 @@
+{
+  "required": "Trường này là bắt buộc",
+  "invalid": "Định dạng không hợp lệ",
+  "passwordMismatch": "Mật khẩu và xác nhận mật khẩu không khớp",
+  "emailInvalid": "Email không hợp lệ"
+}

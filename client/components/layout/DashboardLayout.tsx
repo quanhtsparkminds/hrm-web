@@ -2,6 +2,18 @@ import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { LucideIcon, Briefcase, LogOut, Menu, X } from "lucide-react";
 import { images } from "@/assets";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { useTranslation } from "react-i18next";
 
 export type NavItem = {
   id: string;
@@ -33,6 +45,7 @@ export default function DashboardLayout({
   avatarGradient = "from-blue-400 to-indigo-600",
   sidebarTitle = "HRM Sparkminds",
 }: DashboardLayoutProps) {
+  const { t } = useTranslation("common");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -84,14 +97,40 @@ export default function DashboardLayout({
         </nav>
 
         <div className="p-4 border-t border-gray-200">
-          <Button
-            variant="outline"
-            className={`w-full ${sidebarOpen ? "justify-start" : "justify-center p-0"}`}
-            onClick={onLogout}
-          >
-            <LogOut size={18} className="shrink-0" />
-            {sidebarOpen && <span className="ml-2">Logout</span>}
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="outline"
+                className={`w-full ${sidebarOpen ? "justify-start text-red-600 hover:text-red-700 hover:bg-red-50 border-red-100" : "justify-center p-0 text-red-600 hover:text-red-700 hover:bg-red-50 border-red-100"}`}
+              >
+                <LogOut size={18} className="shrink-0" />
+                {sidebarOpen && (
+                  <span className="ml-2 font-medium">{t("logout")}</span>
+                )}
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="rounded-2xl border-none shadow-2xl">
+              <AlertDialogHeader>
+                <AlertDialogTitle className="text-xl font-bold text-gray-900">
+                  {t("logoutConfirmTitle")}
+                </AlertDialogTitle>
+                <AlertDialogDescription className="text-gray-500">
+                  {t("logoutConfirmMessage")}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter className="mt-4 gap-3">
+                <AlertDialogCancel className="rounded-xl border-gray-200 hover:bg-gray-50 font-medium">
+                  {t("cancel")}
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={onLogout}
+                  className="rounded-xl bg-red-600 hover:bg-red-700 text-white font-medium border-none"
+                >
+                  {t("confirm")}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
 

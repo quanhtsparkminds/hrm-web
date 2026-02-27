@@ -1,10 +1,11 @@
 import { LoginForm } from "./components/LoginForm";
 import { useLogin } from "./Login.hook";
 import { images } from "@/assets";
-
+import { useTranslation } from "react-i18next";
 import { Briefcase, Shield, Users, BarChart3, AlertCircle } from "lucide-react";
 
 const LoginScreen = () => {
+  const { t } = useTranslation(["login", "common"]);
   const loginHook = useLogin();
   const { error, navigate } = loginHook;
 
@@ -47,23 +48,22 @@ const LoginScreen = () => {
 
             <div>
               <h2 className="text-[24px] lg:text-[28px] xl:text-3xl font-extrabold text-white leading-tight tracking-tight">
-                Manage your team
+                {t("heroTitle")}
                 <br />
                 <span className="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">
-                  effortlessly
+                  {t("heroHighlight")}
                 </span>
               </h2>
               <p className="mt-3 text-sm text-white/70 leading-relaxed max-w-[340px]">
-                Streamline HR processes, track employee performance, and build a
-                better workplace — all in one platform.
+                {t("heroSubtitle")}
               </p>
             </div>
 
             <div className="flex gap-2 mt-6 flex-wrap">
               {[
-                { icon: Users, label: "Team Management" },
-                { icon: BarChart3, label: "Analytics" },
-                { icon: Shield, label: "Secure" },
+                { icon: Users, label: t("teamManagement") },
+                { icon: BarChart3, label: t("analytics") },
+                { icon: Shield, label: t("secure") },
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
@@ -91,10 +91,10 @@ const LoginScreen = () => {
             <div className="bg-white rounded-[20px] p-6 sm:p-7 shadow-[0_8px_32px_rgba(99,69,237,0.08)] border border-black/[0.04] flex flex-col gap-4 sm:gap-4">
               <div className="text-center">
                 <h1 className="text-[24px] sm:text-[26px] font-extrabold text-foreground tracking-tighter">
-                  Welcome Back
+                  {t("title")}
                 </h1>
                 <p className="mt-1.5 text-sm text-muted-foreground">
-                  Sign in to your HR account to continue
+                  {t("subtitle")}
                 </p>
               </div>
 
@@ -110,25 +110,25 @@ const LoginScreen = () => {
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-border" />
                 <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
-                  or
+                  {t("common:or")}
                 </span>
                 <div className="flex-1 h-px bg-border" />
               </div>
 
               <p className="text-center text-sm text-muted-foreground">
-                Don't have an account?{" "}
+                {t("dontHaveAccount")}{" "}
                 <button
                   type="button"
                   onClick={() => navigate("/signup")}
                   className="text-[#485DAA] font-semibold hover:opacity-80 hover:underline transition-opacity"
                 >
-                  Create account
+                  {t("createAccount")}
                 </button>
               </p>
             </div>
 
             <p className="text-center text-xs text-muted-foreground/70">
-              © {new Date().getFullYear()} HRM System. All rights reserved.
+              {t("common:copyright", { year: new Date().getFullYear() })}
             </p>
           </div>
         </div>

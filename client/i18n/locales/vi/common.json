@@ -1,0 +1,18 @@
+{
+    "welcome": "Chào mừng trở lại",
+    "signIn": "Đăng nhập",
+    "signUp": "Đăng ký",
+    "email": "Địa chỉ Email",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "username": "Tên đăng nhập",
+    "loading": "Đang tải...",
+    "or": "hoặc",
+    "backToLogin": "Quay lại Đăng nhập",
+    "logout": "Đăng xuất",
+    "logoutConfirmTitle": "Xác nhận đăng xuất",
+    "logoutConfirmMessage": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?",
+    "cancel": "Hủy",
+    "confirm": "Xác nhận",
+    "copyright": "© {{year}} Hệ thống HRM. Bảo lưu mọi quyền."
+}

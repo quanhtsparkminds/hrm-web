@@ -1,4 +1,5 @@
 import "./global.css";
+import "@/i18n";
 
 import RouteLoader from "@/components/RouteLoader";
 import Loading from "@/components/ui/Loading";

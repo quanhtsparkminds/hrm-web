@@ -1,0 +1,6 @@
+{
+  "required": "This field is required",
+  "invalid": "Invalid format",
+  "passwordMismatch": "Password and confirm password do not match",
+  "emailInvalid": "Email is invalid"
+}

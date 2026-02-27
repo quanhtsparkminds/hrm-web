@@ -9,14 +9,15 @@ import {
   AlertCircle,
   ArrowLeft,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const SignupScreen = () => {
+  const { t } = useTranslation(["signup", "common"]);
   const signupHook = useSignup();
   const { error, navigate } = signupHook;
 
   return (
     <div className="min-h-[100dvh] bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 flex items-center justify-center relative overflow-hidden p-4 md:p-6 lg:p-4 font-Inter font-sans-serif">
-      {/* Decorative blobs */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         aria-hidden="true"
@@ -27,7 +28,6 @@ const SignupScreen = () => {
       </div>
 
       <div className="relative z-10 flex w-full max-w-[1000px] min-h-[600px] lg:min-h-[640px] xl:max-w-[1100px] xl:min-h-[700px] rounded-3xl overflow-hidden shadow-[0_25px_60px_rgba(72,93,170,0.12)] animate-fade-up">
-        {/* Left Side - Hero (Adapt slightly from Login) */}
         <div className="hidden md:flex flex-[1] lg:flex-[1.1] bg-gradient-to-br from-[#485DAA] via-[#485DAA]/90 to-[#364986] p-7 lg:p-8 xl:p-12 relative overflow-hidden">
           <div className="absolute inset-0 bg-radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.08)_0% bg-transparent_50%) bg-radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.05)_0% bg-transparent_50%)" />
 
@@ -55,24 +55,22 @@ const SignupScreen = () => {
 
             <div>
               <h2 className="text-[24px] lg:text-[28px] xl:text-3xl font-extrabold text-white leading-tight tracking-tight">
-                Join our community
+                {t("heroTitle")}
                 <br />
                 <span className="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">
-                  today
+                  {t("heroHighlight")}
                 </span>
               </h2>
               <p className="mt-3 text-sm text-white/70 leading-relaxed max-w-[340px]">
-                Create an account to start managing your team, tracking
-                performance, and building a better workplace with our
-                comprehensive HR tools.
+                {t("heroSubtitle")}
               </p>
             </div>
 
             <div className="flex gap-2 mt-6 flex-wrap">
               {[
-                { icon: Users, label: "Easy Signup" },
-                { icon: Shield, label: "Secure Data" },
-                { icon: BarChart3, label: "Full Analytics" },
+                { icon: Users, label: t("easySignup") },
+                { icon: Shield, label: t("secureData") },
+                { icon: BarChart3, label: t("fullAnalytics") },
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
@@ -94,7 +92,7 @@ const SignupScreen = () => {
                 <Briefcase className="w-5 h-5 text-white" />
               </div>
               <span className="text-lg font-bold text-foreground tracking-tight">
-                HRM System
+                HRM Sparkminds
               </span>
             </div>
 
@@ -105,14 +103,12 @@ const SignupScreen = () => {
                   className="flex items-center gap-1.5 text-primary hover:opacity-80 transition-opacity text-xs font-semibold mb-2"
                 >
                   <ArrowLeft size={14} />
-                  Back to Login
+                  {t("common:backToLogin")}
                 </button>
                 <h1 className="text-[24px] sm:text-[26px] font-extrabold text-foreground tracking-tighter">
-                  Create Account
+                  {t("title")}
                 </h1>
-                <p className="text-sm text-muted-foreground">
-                  Get started with your HR management account
-                </p>
+                <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
               </div>
 
               {error && (
@@ -127,25 +123,25 @@ const SignupScreen = () => {
               <div className="flex items-center gap-4">
                 <div className="flex-1 h-px bg-border" />
                 <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
-                  or
+                  {t("common:or")}
                 </span>
                 <div className="flex-1 h-px bg-border" />
               </div>
 
               <p className="text-center text-sm text-muted-foreground">
-                Already have an account?{" "}
+                {t("alreadyHaveAccount")}{" "}
                 <button
                   type="button"
                   onClick={() => navigate("/login")}
                   className="text-[#485DAA] font-semibold hover:opacity-80 hover:underline transition-opacity"
                 >
-                  Sign in
+                  {t("common:signIn")}
                 </button>
               </p>
             </div>
 
             <p className="text-center text-xs text-muted-foreground/70">
-              © {new Date().getFullYear()} HRM System. All rights reserved.
+              {t("common:copyright", { year: new Date().getFullYear() })}
             </p>
           </div>
         </div>

@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useSignupMutation } from "@/hook/AuthHook/AuthHook";
 import { ApiError } from "@/lib/axios";
 import { getErrorMessage } from "@/lib/errorMapping";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 export const useSignup = () => {
+    const { t } = useTranslation(["signup", "error"]);
     const navigate = useNavigate();
     const [error, setError] = useState<string | null>(null);
     const [username, setUsername] = useState("");
@@ -26,7 +28,7 @@ export const useSignup = () => {
         setError(null);
 
         if (password !== confirmPassword) {
-            setError("Passwords do not match");
+            setError(t("error:passwordsDoNotMatch"));
             return;
         }
 
@@ -36,11 +38,11 @@ export const useSignup = () => {
                 email,
                 password,
             });
-            toast.success("Account created successfully. Please login.");
+            toast.success(t("successMessage"));
         } catch (err: any) {
             const message = err instanceof ApiError
                 ? getErrorMessage(err.errorCode, err.message)
-                : (err.message || "Something went wrong");
+                : (err.message || t("error:somethingWentWrong"));
             setError(message);
         }
     };

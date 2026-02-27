@@ -1,0 +1,9 @@
+{
+    "accountInactive": "Tài khoản chưa được kích hoạt. Vui lòng liên hệ quản trị viên.",
+    "invalidCredentials": "Tên đăng nhập hoặc mật khẩu không chính xác.",
+    "emailExists": "Email đã tồn tại.",
+    "usernameExists": "Tên đăng nhập đã tồn tại.",
+    "passwordsDoNotMatch": "Mật khẩu không khớp",
+    "unexpectedError": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau.",
+    "somethingWentWrong": "Đã xảy ra lỗi"
+}

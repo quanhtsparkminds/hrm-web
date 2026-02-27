@@ -1,0 +1,13 @@
+{
+  "title": "Đăng nhập",
+  "submitButton": "Đăng nhập",
+  "forgotPassword": "Quên mật khẩu?",
+  "dontHaveAccount": "Chưa có tài khoản?",
+  "alreadyHaveAnAccount": "Bạn đã có tài khoản?",
+  "signUp": "Đăng ký",
+  "welcomeBack": "Xin chào trở lại",
+  "signInContinue": "Sign in to continue your journey with the 4XC ecosystem.",
+  "signInFailedContent": "Không thể đăng nhập. Vui lòng thử lại sau hoặc liên hệ với hỗ trợ để được hỗ trợ",
+  "termAndCondition": "Điều khoản sử dụng",
+  "privacyPolicy": "Chính sách bảo mật"
+}

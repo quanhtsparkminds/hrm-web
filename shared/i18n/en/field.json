@@ -1,0 +1,38 @@
+{
+  "email": {
+    "label": "Email",
+    "placeholder": "Enter your email"
+  },
+  "password": {
+    "label": "Password",
+    "placeholder": "Enter your password"
+  },
+  "accountType": {
+    "label": "Account Type",
+    "placeholder": "Select your account type"
+  },
+  "confirmPassword": {
+    "label": "Confirm Password",
+    "placeholder": "Enter your confirm password"
+  },
+  "dateOfBirth": {
+    "label": "Date of Birth",
+    "placeholder": "Select your date of birth"
+  },
+  "citizenship": {
+    "label": "Country of Citizenship",
+    "placeholder": "Select your country"
+  },
+  "residence": {
+    "label": "Country of Residence",
+    "placeholder": "Select your country"
+  },
+  "firstName": {
+    "label": "First name",
+    "placeholder": "Enter your first name"
+  },
+  "lastName": {
+    "label": "Last name",
+    "placeholder": "Enter your last name"
+  }
+}

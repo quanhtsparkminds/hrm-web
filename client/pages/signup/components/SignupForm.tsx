@@ -2,12 +2,14 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useSignup } from "../Signup.hook";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 interface SignupFormProps {
   signupHook: ReturnType<typeof useSignup>;
 }
 
 export const SignupForm = ({ signupHook }: SignupFormProps) => {
+  const { t } = useTranslation(["signup", "common"]);
   const {
     username,
     setUsername,
@@ -33,12 +35,12 @@ export const SignupForm = ({ signupHook }: SignupFormProps) => {
           htmlFor="signup-username"
           className="text-[13px] font-semibold text-foreground tracking-tight"
         >
-          Username
+          {t("common:username")}
         </label>
         <Input
           id="signup-username"
           type="text"
-          placeholder="Enter username"
+          placeholder={t("common:username")}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="w-full h-[46px] px-4 border-[1.5px] border-border rounded-xl bg-muted/40 text-sm font-Inter font-sans-serif text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-[3px] focus:ring-primary/10 disabled:opacity-60 disabled:cursor-not-allowed"
@@ -53,12 +55,12 @@ export const SignupForm = ({ signupHook }: SignupFormProps) => {
           htmlFor="signup-email"
           className="text-[13px] font-semibold text-foreground tracking-tight"
         >
-          Email Address
+          {t("common:email")}
         </label>
         <Input
           id="signup-email"
           type="email"
-          placeholder="Enter email address"
+          placeholder={t("common:email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full h-[46px] px-4 border-[1.5px] border-border rounded-xl bg-muted/40 text-sm font-Inter font-sans-serif text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-[3px] focus:ring-primary/10 disabled:opacity-60 disabled:cursor-not-allowed"
@@ -73,7 +75,7 @@ export const SignupForm = ({ signupHook }: SignupFormProps) => {
           htmlFor="signup-password"
           className="text-[13px] font-semibold text-foreground tracking-tight"
         >
-          Password
+          {t("common:password")}
         </label>
         <div className="relative">
           <Input
@@ -103,7 +105,7 @@ export const SignupForm = ({ signupHook }: SignupFormProps) => {
           htmlFor="signup-confirm-password"
           className="text-[13px] font-semibold text-foreground tracking-tight"
         >
-          Confirm Password
+          {t("common:confirmPassword")}
         </label>
         <div className="relative">
           <Input
@@ -136,10 +138,10 @@ export const SignupForm = ({ signupHook }: SignupFormProps) => {
         {isLoading ? (
           <>
             <Loader2 size={18} className="animate-spin relative z-10" />
-            <span className="relative z-10">Creating Account…</span>
+            <span className="relative z-10">{t("creatingAccount")}</span>
           </>
         ) : (
-          <span className="relative z-10">Create Account</span>
+          <span className="relative z-10">{t("title")}</span>
         )}
       </Button>
     </form>

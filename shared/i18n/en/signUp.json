@@ -1,0 +1,15 @@
+{
+  "title": "Sign Up",
+  "description": "Create your account to get started",
+  "countryDetailsTitle": "Country Details",
+  "countryDetailsDescription": "We need this information to verify your identity and ensure your account meets global compliance requirements.",
+  "citizenshipTitle": "Country of Citizenship",
+  "citizenshipSubtitle": "Select the country that issued your passport or ID.",
+  "residenceTitle": "Country of Residence",
+  "residenceSubtitle": "Select the country where you currently live or pay taxes.",
+  "personalInfoTitle": "Enter Personal Info",
+  "personalInfoDescription": "Provide your full name, email, and create a secure password.",
+  "otpInfo": "4X Club is a private members' company, not a public investment product.",
+  "otpTitle": "Enter Your Invitation Code",
+  "otpSubtitle": "Access to the 4X Club is by invitation only"
+}

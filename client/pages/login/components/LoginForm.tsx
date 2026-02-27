@@ -3,12 +3,14 @@ import { useLogin } from "../Login.hook";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormProps {
   loginHook: ReturnType<typeof useLogin>;
 }
 
 export const LoginForm = ({ loginHook }: LoginFormProps) => {
+  const { t } = useTranslation(["login", "common"]);
   const {
     username,
     setUsername,
@@ -29,15 +31,15 @@ export const LoginForm = ({ loginHook }: LoginFormProps) => {
           htmlFor="login-username"
           className="text-[13px] font-semibold text-foreground tracking-tight"
         >
-          Username
+          {t("common:username")}
         </label>
         <Input
           id="login-username"
           type="text"
-          placeholder="Enter username"
+          placeholder={t("common:username")}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full h-[46px] px-4 border-[1.5px] border-border rounded-xl bg-muted/40 text-sm font-Inter font-sans-seriftext-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-[3px] focus:ring-primary/10 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full h-[46px] px-4 border-[1.5px] border-border rounded-xl bg-muted/40 text-sm font-Inter font-sans-serif text-foreground placeholder:text-muted-foreground/60 outline-none transition-all duration-200 focus:border-primary focus:bg-white focus:ring-[3px] focus:ring-primary/10 disabled:opacity-60 disabled:cursor-not-allowed"
           disabled={isLoading}
           autoComplete="username"
         />
@@ -50,14 +52,14 @@ export const LoginForm = ({ loginHook }: LoginFormProps) => {
             htmlFor="login-password"
             className="text-[13px] font-semibold text-foreground tracking-tight"
           >
-            Password
+            {t("common:password")}
           </Label>
           <button
             type="button"
             onClick={() => navigate("/forgot-password")}
             className="text-xs font-medium text-primary hover:opacity-70 transition-opacity"
           >
-            Forgot password?
+            {t("forgotPassword")}
           </button>
         </div>
         <div className="relative">
@@ -93,10 +95,10 @@ export const LoginForm = ({ loginHook }: LoginFormProps) => {
         {isLoading ? (
           <>
             <Loader2 size={18} className="animate-spin relative z-10" />
-            <span className="relative z-10">Signing in…</span>
+            <span className="relative z-10">{t("signingIn")}</span>
           </>
         ) : (
-          <span className="relative z-10">Sign In</span>
+          <span className="relative z-10">{t("common:signIn")}</span>
         )}
       </Button>
     </form>

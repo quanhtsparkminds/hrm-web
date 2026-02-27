@@ -1,0 +1,30 @@
+{
+  "email": {
+    "label": "Email",
+    "placeholder": "Nhập email của bạn"
+  },
+  "password": {
+    "label": "Mật khẩu",
+    "placeholder": "Nhập mật khẩu của bạn"
+  },
+  "accountType": {
+    "label": "Loại tài khoản",
+    "placeholder": "Chọn loại tài khoản của bạn"
+  },
+  "confirmPassword": {
+    "label": "Xác nhận mật khẩu",
+    "placeholder": "Nhập lại mật khẩu của bạn"
+  },
+  "dateOfBirth": {
+    "label": "Ngày sinh",
+    "placeholder": "Chọn ngày sinh của bạn"
+  },
+  "firstName": {
+    "label": "Tên",
+    "placeholder": "Nhập tên của bạn"
+  },
+  "lastName": {
+    "label": "Họ",
+    "placeholder": "Nhập họ của bạn"
+  }
+}

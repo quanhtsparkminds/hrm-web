@@ -1,14 +1,17 @@
-export const ERROR_CODE_MAP: Record<string, string> = {
-    // Auth errors
-    "private.error.signup.account-inactive": "Account is inactive. Please contact administrator.",
-    "private.error.auth.invalid-credentials": "Invalid username or password.",
-    "private.error.signup.email-exists": "Email already exists.",
-    "private.error.signup.username-exists": "Username already exists.",
+import i18n from "@/i18n";
 
-    // Default fallback
-    "default": "An unexpected error occurred. Please try again later."
+export const ERROR_CODE_TO_KEY: Record<string, string> = {
+    // Auth errors
+    "private.error.signup.account-inactive": "accountInactive",
+    "private.error.auth.invalid-credentials": "invalidCredentials",
+    "private.error.signup.email-exists": "emailExists",
+    "private.error.signup.username-exists": "usernameExists",
 };
 
 export const getErrorMessage = (errorCode: string, defaultMessage?: string): string => {
-    return ERROR_CODE_MAP[errorCode] || defaultMessage || ERROR_CODE_MAP["default"];
+    const translationKey = ERROR_CODE_TO_KEY[errorCode];
+    if (translationKey && i18n.exists(`error:${translationKey}`)) {
+        return i18n.t(`error:${translationKey}`);
+    }
+    return defaultMessage || i18n.t("error:unexpectedError");
 };

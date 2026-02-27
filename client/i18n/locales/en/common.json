@@ -1,0 +1,18 @@
+{
+    "welcome": "Welcome back",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "username": "Username",
+    "loading": "Loading...",
+    "or": "or",
+    "backToLogin": "Back to Login",
+    "logout": "Logout",
+    "logoutConfirmTitle": "Confirm Logout",
+    "logoutConfirmMessage": "Are you sure you want to log out of the system?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "copyright": "© {{year}} HRM System. All rights reserved."
+}

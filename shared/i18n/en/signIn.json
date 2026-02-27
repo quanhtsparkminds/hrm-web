@@ -1,0 +1,13 @@
+{
+  "title": "Sign In",
+  "submitButton": "Sign In",
+  "forgotPassword": "Forgot your password?",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "signUp": "Sign Up",
+  "welcomeBack": "Welcome Back",
+  "signInContinue": "Sign in to continue your journey with the 4XC ecosystem.",
+  "signInFailedContent": "Cannot sign in now. Please try again later or contact support for assistance",
+  "termAndCondition": "Terms of Use",
+  "privacyPolicy": "Privacy Policy"
+}
