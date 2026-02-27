@@ -14,9 +14,9 @@ import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import HRDashboard from "./pages/HRDashboard";
 import NotFound from "./pages/NotFound";
-import Signup from "./pages/Signup";
 import TeamLeaderDashboard from "./pages/TeamLeaderDashboard";
 import LoginScreen from "./pages/login/Login.screen";
+import SignupScreen from "./pages/signup/Signup.screen";
 import DirectorScreen from "./pages/dashboard/director/Director.screen";
 
 const queryClient = new QueryClient();
@@ -33,7 +33,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<SignupScreen />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/director-dashboard" element={<DirectorScreen />} />

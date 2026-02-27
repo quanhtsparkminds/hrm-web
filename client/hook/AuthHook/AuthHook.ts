@@ -15,11 +15,6 @@ export const useLoginMutation = () => {
         mutationFn: async (data: Types.TLoginRequest) => {
             // 1. Login to get tokens
             const loginRes = await authApi.login(data);
-
-            if (!loginRes.success || !loginRes.data) {
-                throw new Error(loginRes.message || "Login failed");
-            }
-
             const { accessToken, refreshToken } = loginRes.data;
 
             // Dispatch signIn — stores tokens in Redux state + storage layer
@@ -27,11 +22,6 @@ export const useLoginMutation = () => {
 
             // 2. Fetch current user profile
             const userRes = await authApi.getCurrentUser();
-
-            if (!userRes.success || !userRes.data) {
-                throw new Error("Failed to fetch user profile");
-            }
-
             const profile = userRes.data;
 
             // Update TanStack Query cache
@@ -41,6 +31,19 @@ export const useLoginMutation = () => {
             dispatch(setUser(profile));
 
             return profile;
+        },
+    });
+};
+
+export const useSignupMutation = () => {
+    const navigate = useNavigate();
+
+    return useMutation({
+        mutationFn: async (data: Types.TSignupRequest) => {
+            return await authApi.signup(data);
+        },
+        onSuccess: () => {
+            navigate("/login");
         },
     });
 };
@@ -59,7 +62,7 @@ export const useLogout = () => {
         } catch (error) {
             console.error("Logout failed:", error);
         } finally {
-            // 1. Clear TanStack Query cache
+            // 1. Clear TanStinline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white/[0.12] backdrop-blur-sm border border-white/[0.12 rounded-full text-white/90 text-xs font-medium hover:bg-white/20 transition-colors
             queryClient.clear();
             // 2. Dispatch signOut (Redux + Storage)
             dispatch(signOut());

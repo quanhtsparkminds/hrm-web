@@ -20,7 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface LeaveRecord {
+type LeaveRecord= {
   id: string;
   type: string;
   startDate: string;
@@ -29,7 +29,7 @@ interface LeaveRecord {
   days: number;
 }
 
-interface Notification {
+type Notification= {
   id: string;
   title: string;
   message: string;

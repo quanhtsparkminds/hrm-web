@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "@/hook";
+import { ApiError } from "@/lib/axios";
+import { getErrorMessage } from "@/lib/errorMapping";
 
 export const useLogin = () => {
     const navigate = useNavigate();
@@ -34,7 +36,11 @@ export const useLogin = () => {
         showPassword,
         togglePasswordVisibility,
         isLoading: loginMutation.isPending,
-        error: loginMutation.error?.message ?? "",
+        error: loginMutation.error
+            ? loginMutation.error instanceof ApiError
+                ? getErrorMessage(loginMutation.error.errorCode, loginMutation.error.message)
+                : loginMutation.error.message
+            : "",
         handleLogin,
         navigate,
     };

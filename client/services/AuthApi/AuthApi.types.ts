@@ -1,3 +1,9 @@
+export interface TSignupRequest {
+    username: string;
+    email: string;
+    password: string;
+}
+
 export interface TLoginRequest {
     username: string;
     password: string;
