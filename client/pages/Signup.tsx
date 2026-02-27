@@ -5,9 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff, Briefcase, ArrowLeft } from "lucide-react";
+import { useAppDispatch } from "@/store";
+import { setUser } from "@/store/slices/AuthSlice";
 
 export default function Signup() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -49,17 +52,18 @@ export default function Signup() {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (formData.email && formData.password && formData.fullName) {
-        // Store user info
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
+        // Dispatch user to Redux store
+        dispatch(
+          setUser({
+            id: 0,
+            username: formData.fullName,
             email: formData.email,
-            name: formData.fullName,
-            department: formData.department,
             role: formData.role,
+            status: "active",
+            avatar: null,
+            age: null,
           })
         );
-        localStorage.setItem("isLoggedIn", "true");
         navigate("/dashboard");
       } else {
         setError("Please fill in all fields");

@@ -1,43 +1,53 @@
 import "./global.css";
 
-import { Toaster } from "@/components/ui/toaster";
-import { createRoot } from "react-dom/client";
+import RouteLoader from "@/components/RouteLoader";
+import Loading from "@/components/ui/Loading";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { store } from "@/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import ForgotPassword from "./pages/ForgotPassword";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import DirectorDashboard from "./pages/DirectorDashboard";
+import ForgotPassword from "./pages/ForgotPassword";
 import HRDashboard from "./pages/HRDashboard";
-import TeamLeaderDashboard from "./pages/TeamLeaderDashboard";
 import NotFound from "./pages/NotFound";
+import Signup from "./pages/Signup";
+import TeamLeaderDashboard from "./pages/TeamLeaderDashboard";
+import LoginScreen from "./pages/login/Login.screen";
+import DirectorScreen from "./pages/dashboard/director/Director.screen";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/director-dashboard" element={<DirectorDashboard />} />
-          <Route path="/hr-dashboard" element={<HRDashboard />} />
-          <Route path="/team-leader-dashboard" element={<TeamLeaderDashboard />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Loading />
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <RouteLoader />
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/director-dashboard" element={<DirectorScreen />} />
+            <Route path="/hr-dashboard" element={<HRDashboard />} />
+            <Route
+              path="/team-leader-dashboard"
+              element={<TeamLeaderDashboard />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </Provider>
 );
 
 createRoot(document.getElementById("root")!).render(<App />);
