@@ -123,7 +123,7 @@ export default function DashboardLayout({
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter className="mt-4 gap-3">
-                <AlertDialogCancel className="rounded-xl border-gray-200 dark:border-border hover:bg-gray-50 dark:hover:bg-muted font-medium">
+                <AlertDialogCancel className="rounded-xl border-gray-200 dark:border-border  dark:hover:bg-muted font-medium">
                   {t('cancel')}
                 </AlertDialogCancel>
                 <AlertDialogAction
