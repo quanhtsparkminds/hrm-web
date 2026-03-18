@@ -1,20 +1,20 @@
-import { defineConfig, Plugin } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { createServer } from "./server";
+import { defineConfig, Plugin } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
+import { createServer } from './server';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: '::',
     port: 8080,
     fs: {
-      allow: ["./client", "./shared"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+      allow: ['./client', './shared'],
+      deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', 'server/**'],
     },
     proxy: {
       '/api': {
-        target: 'http://192.168.50.235:8001/api/v1',
+        target: 'http://172.16.1.28:8001/api/v1',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
@@ -33,21 +33,21 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    outDir: "dist/spa",
+    outDir: 'dist/spa',
   },
   plugins: [react(), expressPlugin()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./client"),
-      "@shared": path.resolve(__dirname, "./shared"),
+      '@': path.resolve(__dirname, './client'),
+      '@shared': path.resolve(__dirname, './shared'),
     },
   },
 }));
 
 function expressPlugin(): Plugin {
   return {
-    name: "express-plugin",
-    apply: "serve", // Only apply during development (serve mode)
+    name: 'express-plugin',
+    apply: 'serve', // Only apply during development (serve mode)
     configureServer(server) {
       const app = createServer();
 

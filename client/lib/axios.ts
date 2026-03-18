@@ -3,22 +3,8 @@ import { storage, StorageKeys } from '@/lib/storage';
 import { store } from '@/store';
 import { setLoading } from '@/store/slices/UiSlice';
 
-let activeRequests = 0;
-
-const showLoading = () => {
-    activeRequests++;
-    if (activeRequests === 1) {
-        store.dispatch(setLoading(true));
-    }
-};
-
-const hideLoading = () => {
-    activeRequests--;
-    if (activeRequests <= 0) {
-        activeRequests = 0;
-        store.dispatch(setLoading(false));
-    }
-};
+// Global loading overlay is now handled manually for specific major actions (Login, Signup, Logout)
+// to provide a better user experience for quick dashboard interactions.
 
 export class ApiError extends Error {
     errorCode: string;
@@ -70,7 +56,6 @@ const api = axios.create({
  */
 api.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-        showLoading();
         const token = storage.getString(StorageKeys.token);
         if (token && config.headers) {
             config.headers.Authorization = `Bearer ${token}`;
@@ -78,7 +63,6 @@ api.interceptors.request.use(
         return config;
     },
     (error) => {
-        hideLoading();
         return Promise.reject(error);
     }
 );
@@ -88,7 +72,6 @@ api.interceptors.request.use(
  */
 api.interceptors.response.use(
     (response: AxiosResponse<ApiResponse<any>>) => {
-        hideLoading();
         const { data } = response;
 
         // Handle cases where the backend returns success: false explicitly in the body
@@ -122,12 +105,10 @@ api.interceptors.response.use(
             }
 
             // Return the message from backend if available, otherwise generic error
-            hideLoading();
             return Promise.reject(new ApiError(data?.message || error.message || 'Server Error', data?.errorCode || ''));
         }
 
         // Handle Network errors or Timeouts
-        hideLoading();
         return Promise.reject(new Error(error.message || 'Network Error'));
     }
 );

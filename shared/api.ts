@@ -10,3 +10,22 @@
 export interface DemoResponse {
   message: string;
 }
+
+export interface DirectorSummaryResponse {
+  totalEmployees: number;
+  totalPresentToDay: number;
+  totalOnLeave: number;
+}
+
+export interface HRSummaryResponse {
+  totalEmployees: number;
+  totalPendingLeaveRequest: number;
+  totalApprovedLeaveRequest: number;
+  totalUpcomingEvent: number;
+}
+
+export interface MemberSummaryResponse {
+  totalVacationDays: number;
+  totalSickDays: string;
+  totalCasualDays: string;
+}

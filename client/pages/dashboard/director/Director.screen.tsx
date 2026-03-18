@@ -1,18 +1,11 @@
-import DashboardLayout from "@/components/layout/DashboardLayout";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  CheckCircle,
-  Clock,
-  Edit,
-  Plus,
-  Trash2,
-  TrendingUp,
-  Users,
-} from "lucide-react";
-import { useDirector } from "./Director.hook";
+import DashboardLayout from '@/components/layout/DashboardLayout';
+import TeamForum from '@/components/forum/TeamForum';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { CheckCircle, Clock, Edit, Plus, Trash2, TrendingUp, Users } from 'lucide-react';
+import { useDirector } from './Director.hook';
 
 export default function DirectorScreen() {
   const {
@@ -45,29 +38,21 @@ export default function DirectorScreen() {
       title="Director Dashboard"
       avatarGradient="from-red-400 to-red-600"
     >
-      {currentTab === "overview" && (
+      {currentTab === 'overview' && (
         <div className="space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Sparkminds Overview
-            </h2>
-            <p className="text-gray-600">
-              Full control and management of your organization
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Sparkminds Overview</h2>
+            <p className="text-gray-600">Full control and management of your organization</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Total Employees
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Total Employees</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-primary">
-                    {stats.totalEmployees}
-                  </span>
+                  <span className="text-3xl font-bold text-primary">{stats.totalEmployees}</span>
                   <Users className="w-8 h-8 text-blue-200" />
                 </div>
               </CardContent>
@@ -75,15 +60,11 @@ export default function DirectorScreen() {
 
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Present Today
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Present Today</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-green-600">
-                    {stats.presentToday}
-                  </span>
+                  <span className="text-3xl font-bold text-green-600">{stats.presentToday}</span>
                   <CheckCircle className="w-8 h-8 text-green-200" />
                 </div>
               </CardContent>
@@ -95,9 +76,7 @@ export default function DirectorScreen() {
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-yellow-600">
-                    {stats.onLeaveToday}
-                  </span>
+                  <span className="text-3xl font-bold text-yellow-600">{stats.onLeaveToday}</span>
                   <Clock className="w-8 h-8 text-yellow-200" />
                 </div>
               </CardContent>
@@ -105,9 +84,7 @@ export default function DirectorScreen() {
 
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Monthly Salary Cost
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Monthly Salary Cost</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
@@ -127,16 +104,13 @@ export default function DirectorScreen() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Button
-                  className="flex-1"
-                  onClick={() => handleTabSwitch("employees")}
-                >
+                <Button className="flex-1" onClick={() => handleTabSwitch('employees')}>
                   Add Employee
                 </Button>
                 <Button
                   variant="outline"
                   className="flex-1"
-                  onClick={() => handleTabSwitch("salary")}
+                  onClick={() => handleTabSwitch('salary')}
                 >
                   Manage Salary
                 </Button>
@@ -171,18 +145,18 @@ export default function DirectorScreen() {
                     <div className="flex items-center gap-2">
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          emp.status === "active"
-                            ? "bg-green-50 text-green-700"
-                            : emp.status === "on_leave"
-                              ? "bg-yellow-50 text-yellow-700"
-                              : "bg-gray-50 text-gray-700"
+                          emp.status === 'active'
+                            ? 'bg-green-50 text-green-700'
+                            : emp.status === 'on_leave'
+                              ? 'bg-yellow-50 text-yellow-700'
+                              : 'bg-gray-50 text-gray-700'
                         }`}
                       >
-                        {emp.status === "active"
-                          ? "Active"
-                          : emp.status === "on_leave"
-                            ? "On Leave"
-                            : "Inactive"}
+                        {emp.status === 'active'
+                          ? 'Active'
+                          : emp.status === 'on_leave'
+                            ? 'On Leave'
+                            : 'Inactive'}
                       </span>
                     </div>
                   </div>
@@ -194,21 +168,14 @@ export default function DirectorScreen() {
       )}
 
       {/* Employees Tab */}
-      {currentTab === "employees" && (
+      {currentTab === 'employees' && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                Employee Management
-              </h2>
-              <p className="text-gray-600">
-                Add, edit, and manage employee records
-              </p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Employee Management</h2>
+              <p className="text-gray-600">Add, edit, and manage employee records</p>
             </div>
-            <Button
-              onClick={() => setShowAddEmployee(!showAddEmployee)}
-              className="gap-2"
-            >
+            <Button onClick={() => setShowAddEmployee(!showAddEmployee)} className="gap-2">
               <Plus size={18} />
               Add Employee
             </Button>
@@ -234,18 +201,13 @@ export default function DirectorScreen() {
                       type="text"
                       placeholder="Full Name"
                       value={newEmployee.name}
-                      onChange={(e) =>
-                        setNewEmployee({ ...newEmployee, name: e.target.value })
-                      }
+                      onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })}
                       className="h-10"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="email"
-                      className="text-gray-700 font-medium"
-                    >
+                    <Label htmlFor="email" className="text-gray-700 font-medium">
                       Email
                     </Label>
                     <Input
@@ -270,9 +232,7 @@ export default function DirectorScreen() {
                     <select
                       id="role"
                       value={newEmployee.role}
-                      onChange={(e) =>
-                        setNewEmployee({ ...newEmployee, role: e.target.value })
-                      }
+                      onChange={(e) => setNewEmployee({ ...newEmployee, role: e.target.value })}
                       className="w-full h-10 px-3 border border-gray-200 rounded-lg bg-white"
                     >
                       <option value="employee">Employee</option>
@@ -282,10 +242,7 @@ export default function DirectorScreen() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="department"
-                      className="text-gray-700 font-medium"
-                    >
+                    <Label htmlFor="department" className="text-gray-700 font-medium">
                       Department
                     </Label>
                     <Input
@@ -304,10 +261,7 @@ export default function DirectorScreen() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="salary"
-                      className="text-gray-700 font-medium"
-                    >
+                    <Label htmlFor="salary" className="text-gray-700 font-medium">
                       Monthly Salary
                     </Label>
                     <Input
@@ -326,10 +280,7 @@ export default function DirectorScreen() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label
-                      htmlFor="bonus"
-                      className="text-gray-700 font-medium"
-                    >
+                    <Label htmlFor="bonus" className="text-gray-700 font-medium">
                       Bonus
                     </Label>
                     <Input
@@ -389,12 +340,12 @@ export default function DirectorScreen() {
                       </span>
                       <span
                         className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          emp.status === "active"
-                            ? "bg-green-50 text-green-700"
-                            : "bg-yellow-50 text-yellow-700"
+                          emp.status === 'active'
+                            ? 'bg-green-50 text-green-700'
+                            : 'bg-yellow-50 text-yellow-700'
                         }`}
                       >
-                        {emp.status === "active" ? "Active" : "On Leave"}
+                        {emp.status === 'active' ? 'Active' : 'On Leave'}
                       </span>
                       <div className="flex gap-2">
                         <button
@@ -420,66 +371,47 @@ export default function DirectorScreen() {
       )}
 
       {/* Salary & Bonus Tab */}
-      {currentTab === "salary" && (
+      {currentTab === 'salary' && (
         <div className="space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Salary & Bonus Management
-            </h2>
-            <p className="text-gray-600">
-              View and update employee compensation
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Salary & Bonus Management</h2>
+            <p className="text-gray-600">View and update employee compensation</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Total Monthly Salary
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Total Monthly Salary</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-3xl font-bold text-primary">
                   ${(stats.totalSalaryExpense / 1000).toFixed(1)}K
                 </p>
-                <p className="text-sm text-gray-600 mt-2">
-                  {stats.totalEmployees} employees
-                </p>
+                <p className="text-sm text-gray-600 mt-2">{stats.totalEmployees} employees</p>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Total Monthly Bonus
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Total Monthly Bonus</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-3xl font-bold text-green-600">
-                  $
-                  {(
-                    employees.reduce((sum, e) => sum + e.bonus, 0) / 1000
-                  ).toFixed(1)}
-                  K
+                  ${(employees.reduce((sum, e) => sum + e.bonus, 0) / 1000).toFixed(1)}K
                 </p>
-                <p className="text-sm text-gray-600 mt-2">
-                  {stats.totalEmployees} employees
-                </p>
+                <p className="text-sm text-gray-600 mt-2">{stats.totalEmployees} employees</p>
               </CardContent>
             </Card>
 
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">
-                  Total Compensation
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">Total Compensation</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-3xl font-bold text-purple-600">
                   $
                   {(
-                    (stats.totalSalaryExpense +
-                      employees.reduce((sum, e) => sum + e.bonus, 0)) /
+                    (stats.totalSalaryExpense + employees.reduce((sum, e) => sum + e.bonus, 0)) /
                     1000
                   ).toFixed(1)}
                   K
@@ -504,16 +436,12 @@ export default function DirectorScreen() {
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{emp.name}</p>
                       <p className="text-sm text-gray-500">
-                        {emp.role.replace("_", " ").toUpperCase()}
+                        {emp.role.replace('_', ' ').toUpperCase()}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-gray-900">
-                        ${emp.salary.toLocaleString()}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Bonus: ${emp.bonus.toLocaleString()}
-                      </p>
+                      <p className="font-semibold text-gray-900">${emp.salary.toLocaleString()}</p>
+                      <p className="text-sm text-gray-500">Bonus: ${emp.bonus.toLocaleString()}</p>
                     </div>
                     <button
                       onClick={() => handleUpdateSalary(emp.id)}
@@ -530,15 +458,11 @@ export default function DirectorScreen() {
       )}
 
       {/* Reports Tab */}
-      {currentTab === "reports" && (
+      {currentTab === 'reports' && (
         <div className="space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Company Reports
-            </h2>
-            <p className="text-gray-600">
-              Analytics and insights about your organization
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Company Reports</h2>
+            <p className="text-gray-600">Analytics and insights about your organization</p>
           </div>
 
           <Card className="border-0 shadow-sm">
@@ -547,22 +471,13 @@ export default function DirectorScreen() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {Array.from(
-                  new Map(employees.map((e) => [e.department, e])),
-                ).map(([dept]) => {
-                  const deptEmployees = employees.filter(
-                    (e) => e.department === dept,
-                  );
+                {Array.from(new Map(employees.map((e) => [e.department, e]))).map(([dept]) => {
+                  const deptEmployees = employees.filter((e) => e.department === dept);
                   return (
-                    <div
-                      key={dept}
-                      className="p-4 border border-gray-200 rounded-lg"
-                    >
+                    <div key={dept} className="p-4 border border-gray-200 rounded-lg">
                       <div className="flex justify-between items-center mb-2">
                         <p className="font-semibold text-gray-900">{dept}</p>
-                        <p className="text-sm text-gray-600">
-                          {deptEmployees.length} employees
-                        </p>
+                        <p className="text-sm text-gray-600">{deptEmployees.length} employees</p>
                       </div>
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                         <div
@@ -580,6 +495,8 @@ export default function DirectorScreen() {
           </Card>
         </div>
       )}
+
+      {currentTab === 'forum' && <TeamForum user={user} />}
     </DashboardLayout>
   );
 }
