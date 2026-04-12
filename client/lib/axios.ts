@@ -44,7 +44,7 @@ export interface PaginationMetadata {
  */
 const api = axios.create({
     // Use VITE_API_BASE_URL from .env if available, otherwise default to localhost
-    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL || 'http://172.16.1.8:8001/api/v1',
     headers: {
         'Content-Type': 'application/json',
     },

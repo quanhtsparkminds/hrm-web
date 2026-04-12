@@ -7,7 +7,7 @@ export type LeaveRecord = {
   endDate: string;
   totalDays: number;
   reason: string;
-  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  status: 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED';
   approvedByName?: string;
   approvedAt?: string;
   rejectionReason?: string;

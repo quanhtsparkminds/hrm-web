@@ -31,15 +31,35 @@ export const EmployeeApi = {
 
     // The endpoint from the prompt is /api/v1/all-employees
     // and axios base URL is /api
-    return request.get<TEmployee[]>('all-employees', { params });
+    return request.get<TEmployee[]>('/all-employees', { params });
   },
 
   /**
    * Fetches details for a single employee.
-   * @note Additional endpoint logic can be added here once defined in the backend.
    */
   getEmployeeById: (id: number) => {
-    return request.get<TEmployee>(`employee/${id}`);
+    return request.get<TEmployee>(`/employee/${id}`);
+  },
+
+  /**
+   * Creates a new employee record.
+   */
+  createEmployee: (data: Partial<TEmployee>) => {
+    return request.post<TEmployee>('/employee', data);
+  },
+
+  /**
+   * Updates an existing employee record.
+   */
+  updateEmployee: (id: number, data: Partial<TEmployee>) => {
+    return request.put<TEmployee>(`/employee/${id}`, data);
+  },
+
+  /**
+   * Deactivates or removes an employee record.
+   */
+  deleteEmployee: (id: number) => {
+    return request.delete<void>(`/employee/${id}`);
   },
 };
 

@@ -1,26 +1,27 @@
-import DashboardLayout, { NavItem } from '@/components/layout/DashboardLayout';
-import { useLogout } from '@/hook/AuthHook/AuthHook';
-import { useUser } from '@/hook/UserHook/UserHook';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { selectAccessToken, selectIsSignedIn } from '@/store/slices/AuthSlice';
-import {
-  Bell,
-  Briefcase,
-  Calendar,
-  MessageSquare,
-  User as UserIcon,
-} from 'lucide-react';
-import TeamForum from '@/components/forum/TeamForum';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SummaryApi } from '@/services/SummaryApi/SummaryApi';
-import { DirectorSummaryResponse, HRSummaryResponse, MemberSummaryResponse } from '@shared/api';
-import OverviewTab from '@/components/dashboard/OverviewTab';
+import EmployeeTab from '@/components/dashboard/EmployeeTab';
 import LeaveTab from '@/components/dashboard/LeaveTab';
 import NotificationsTab from '@/components/dashboard/NotificationsTab';
+import OverviewTab from '@/components/dashboard/OverviewTab';
 import ProfileTab from '@/components/dashboard/ProfileTab';
-import { LeaveRecord, NotificationType } from '@/components/dashboard/types';
-import LeaveApi from '@/services/LeaveApi/LeaveApi';
+import { NotificationType } from '@/components/dashboard/types';
+import TeamForum from '@/components/forum/TeamForum';
+import DashboardLayout, { NavItem } from '@/components/layout/DashboardLayout';
+import { useLogout } from '@/hook/AuthHook/AuthHook';
+import {
+  useApproveLeave,
+  useCreateLeave,
+  useLeaves,
+  useRejectLeave,
+} from '@/hook/LeaveHook/LeaveHook';
+import { useUser } from '@/hook/UserHook/UserHook';
+import { SummaryApi } from '@/services/SummaryApi/SummaryApi';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { selectAccessToken, selectIsSignedIn } from '@/store/slices/AuthSlice';
+import { DirectorSummaryResponse, HRSummaryResponse, MemberSummaryResponse } from '@shared/api';
+import { Bell, Briefcase, Calendar, MessageSquare, User as UserIcon, Users } from 'lucide-react';
+import { toast } from 'sonner';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Types moved to @/components/dashboard/types.ts
 
@@ -31,10 +32,13 @@ export default function Dashboard() {
   const accessToken = useAppSelector(selectAccessToken);
 
   const [currentTab, setCurrentTab] = useState<
-    'overview' | 'leave' | 'notifications' | 'profile' | 'forum'
+    'overview' | 'leave' | 'notifications' | 'profile' | 'forum' | 'employees'
   >('overview');
 
-  const [leaves, setLeaves] = useState<LeaveRecord[]>([]);
+  const { data: leaves = [], refetch: fetchLeaves } = useLeaves();
+  const createLeaveMutation = useCreateLeave();
+  const approveLeaveMutation = useApproveLeave();
+  const rejectLeaveMutation = useRejectLeave();
 
   const [notifications, setNotifications] = useState<NotificationType[]>([
     {
@@ -85,16 +89,8 @@ export default function Dashboard() {
   const [memberSummary, setMemberSummary] = useState<MemberSummaryResponse | null>(null);
 
   useEffect(() => {
-    const fetchLeaves = async () => {
-      try {
-        const res = await LeaveApi.getAllLeaveRequests();
-        if (res.success) setLeaves(res.data);
-      } catch (error) {
-        console.error('Error fetching leaves:', error);
-      }
-    };
     if (user) fetchLeaves();
-  }, [user]);
+  }, [user, fetchLeaves]);
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -132,27 +128,60 @@ export default function Dashboard() {
     e.preventDefault();
 
     if (!newLeave.startDate || !newLeave.endDate) {
-      alert('Please select both start and end dates');
+      toast.error('Please select both start and end dates');
       return;
     }
 
-    try {
-      const res = await LeaveApi.createLeaveRequest({
+    createLeaveMutation.mutate(
+      {
         leaveType: newLeave.type,
         startDate: new Date(newLeave.startDate).toISOString(),
         endDate: new Date(newLeave.endDate).toISOString(),
         reason: newLeave.reason,
-      });
+      },
+      {
+        onSuccess: (res) => {
+          if (res.success) {
+            setNewLeave({ type: 'ANNUAL', startDate: '', endDate: '', reason: '' });
+            toast.success('Leave request submitted successfully!');
+          }
+        },
+        onError: (error) => {
+          console.error('Error submitting leave request:', error);
+          toast.error('Failed to submit leave request');
+        },
+      },
+    );
+  };
 
-      if (res.success) {
-        setLeaves([res.data, ...leaves]);
-        setNewLeave({ type: 'ANNUAL', startDate: '', endDate: '', reason: '' });
-        alert('Leave request submitted successfully!');
-      }
-    } catch (error) {
-      console.error('Error submitting leave request:', error);
-      alert('Failed to submit leave request');
-    }
+  const handleApproveLeave = async (id: number) => {
+    approveLeaveMutation.mutate(id, {
+      onSuccess: (res) => {
+        if (res.success) toast.success('Leave approved successfully!');
+      },
+      onError: (error) => {
+        console.error('Error approving leave:', error);
+        toast.error('Failed to approve leave');
+      },
+    });
+  };
+
+  const handleRejectLeave = async (id: number) => {
+    const reason = prompt('Please enter rejection reason:');
+    if (reason === null) return;
+
+    rejectLeaveMutation.mutate(
+      { id, reason },
+      {
+        onSuccess: (res) => {
+          if (res.success) toast.success('Leave rejected successfully!');
+        },
+        onError: (error) => {
+          console.error('Error rejecting leave:', error);
+          toast.error('Failed to reject leave');
+        },
+      },
+    );
   };
 
   if (!user) {
@@ -189,6 +218,17 @@ export default function Dashboard() {
       onClick: () => setCurrentTab('forum'),
       isActive: currentTab === 'forum',
     },
+    ...(user.role === 'ADMIN' || user.role === 'HR' || user.role === 'LEADER'
+      ? [
+          {
+            id: 'employees' as const,
+            label: 'Employees',
+            icon: Users,
+            onClick: () => setCurrentTab('employees'),
+            isActive: currentTab === 'employees',
+          },
+        ]
+      : []),
     {
       id: 'profile',
       label: 'Profile',
@@ -228,21 +268,23 @@ export default function Dashboard() {
           leaveBalance={leaveBalance}
           usedLeave={usedLeave}
           leaves={leaves}
+          onApproveLeave={handleApproveLeave}
+          onRejectLeave={handleRejectLeave}
+          onRefresh={fetchLeaves}
         />
       )}
 
       {/* Notifications Tab */}
-      {currentTab === 'notifications' && (
-        <NotificationsTab notifications={notifications} />
-      )}
+      {currentTab === 'notifications' && <NotificationsTab notifications={notifications} />}
 
       {/* Profile Tab */}
-      {currentTab === 'profile' && (
-        <ProfileTab user={user} />
-      )}
+      {currentTab === 'profile' && <ProfileTab user={user} />}
 
       {/* Forum Tab */}
       {currentTab === 'forum' && <TeamForum user={user} />}
+
+      {/* Employees Tab */}
+      {currentTab === 'employees' && <EmployeeTab />}
     </DashboardLayout>
   );
 }

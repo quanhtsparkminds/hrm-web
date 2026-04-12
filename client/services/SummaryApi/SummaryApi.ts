@@ -15,7 +15,7 @@ export const SummaryApi = {
   },
 
   getMemberSummary: () => {
-    return request.get<MemberSummaryResponse>("summary/member");
+    return request.get<MemberSummaryResponse>("summary/owner");
   },
 };
 
