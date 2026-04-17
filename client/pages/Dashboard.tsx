@@ -16,7 +16,7 @@ import {
 import { useUser } from '@/hook/UserHook/UserHook';
 import { SummaryApi } from '@/services/SummaryApi/SummaryApi';
 import { useAppDispatch, useAppSelector } from '@/store';
-import { selectAccessToken, selectIsSignedIn } from '@/store/slices/AuthSlice';
+import { selectIsSignedIn } from '@/store/slices/AuthSlice';
 import { DirectorSummaryResponse, HRSummaryResponse, MemberSummaryResponse } from '@shared/api';
 import { Bell, Briefcase, Calendar, MessageSquare, User as UserIcon, Users } from 'lucide-react';
 import { toast } from 'sonner';
@@ -29,7 +29,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const isSignedIn = useAppSelector(selectIsSignedIn);
-  const accessToken = useAppSelector(selectAccessToken);
 
   const [currentTab, setCurrentTab] = useState<
     'overview' | 'leave' | 'notifications' | 'profile' | 'forum' | 'employees'
@@ -83,10 +82,10 @@ export default function Dashboard() {
     casual: 0,
   };
 
-  const { user } = useUser();
   const [directorSummary, setDirectorSummary] = useState<DirectorSummaryResponse | null>(null);
   const [hrSummary, setHrSummary] = useState<HRSummaryResponse | null>(null);
   const [memberSummary, setMemberSummary] = useState<MemberSummaryResponse | null>(null);
+  const { user, isLoading: isUserLoading, isInitialized } = useUser();
 
   useEffect(() => {
     if (user) fetchLeaves();
@@ -114,10 +113,12 @@ export default function Dashboard() {
   }, [user]);
 
   useEffect(() => {
-    if (!isSignedIn || !accessToken) {
+    // Only redirect to login if we have confirmed the user is NOT signed in
+    // and we have finished the initial session check (isInitialized)
+    if (isInitialized && !isUserLoading && !isSignedIn) {
       navigate('/login');
     }
-  }, [isSignedIn, accessToken, navigate]);
+  }, [isSignedIn, isUserLoading, isInitialized, navigate]);
 
   const { logout } = useLogout();
   const handleLogout = async () => {

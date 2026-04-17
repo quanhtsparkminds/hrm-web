@@ -13,4 +13,8 @@ const signup = async (data: Types.TSignupRequest): Promise<ApiResponse<null>> =>
   return await request.post<null>('auth/signup', data);
 };
 
-export const authApi = { login, getCurrentUser, signup };
+const checkSession = async (): Promise<ApiResponse<{ email: string; authenticated: boolean }>> => {
+  return await request.get<{ email: string; authenticated: boolean }>('auth/check-session');
+};
+
+export const authApi = { login, getCurrentUser, signup, checkSession };

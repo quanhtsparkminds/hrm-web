@@ -2,7 +2,7 @@ import { LoginForm } from './components/LoginForm';
 import { useLogin } from './Login.hook';
 import { images } from '@/assets';
 import { useTranslation } from 'react-i18next';
-import { Briefcase, Shield, Users, BarChart3, AlertCircle } from 'lucide-react';
+import { Briefcase, Shield, Users, BarChart3, AlertCircle, Key } from 'lucide-react';
 
 const LoginScreen = () => {
   const { t } = useTranslation(['login', 'common']);
@@ -110,6 +110,17 @@ const LoginScreen = () => {
                 </span>
                 <div className="flex-1 h-px bg-border" />
               </div>
+
+              <button
+                type="button"
+                onClick={loginHook.handleKeycloakLogin}
+                className="flex items-center justify-center gap-4 w-full px-4 py-3 bg-card hover:bg-muted/50 border border-border rounded-xl font-semibold text-foreground transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+              >
+                <div className="w-6 h-6 bg-[#0085cf] rounded-md flex items-center justify-center">
+                  <Key size={14} className="text-white" />
+                </div>
+                <span>{t('signInWithKeycloak')}</span>
+              </button>
 
               <p className="text-center text-sm text-muted-foreground">
                 {t('dontHaveAccount')}{' '}

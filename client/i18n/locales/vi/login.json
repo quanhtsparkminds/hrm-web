@@ -10,5 +10,6 @@
     "heroSubtitle": "Tối ưu hóa quy trình nhân sự, theo dõi hiệu suất nhân viên và xây dựng môi trường làm việc tốt hơn — tất cả trong một nền tảng.",
     "teamManagement": "Quản lý Đội ngũ",
     "analytics": "Phân tích",
-    "secure": "Bảo mật"
+    "secure": "Bảo mật",
+    "signInWithKeycloak": "Đăng nhập với Keycloak"
 }

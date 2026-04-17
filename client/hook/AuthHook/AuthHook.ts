@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { storage, StorageKeys } from '@/lib/storage';
 import { request } from '@/lib/axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { authApi } from '@/services/AuthApi/AuthApi';
 import * as Types from '@/services/AuthApi/AuthApi.types';
 import { useAppDispatch } from '@/store';
-import { signIn, setUser, signOut } from '@/store/slices/AuthSlice';
+import { setUser, signOut } from '@/store/slices/AuthSlice';
 import { setLoading } from '@/store/slices/UiSlice';
 
 export const useLoginMutation = () => {
@@ -16,21 +15,17 @@ export const useLoginMutation = () => {
     mutationFn: async (data: Types.TLoginRequest) => {
       dispatch(setLoading(true));
       try {
-        // 1. Login to get tokens
-        const loginRes = await authApi.login(data);
-        const { accessToken, refreshToken } = loginRes.data;
+        // 1. Login - server will set session cookie
+        await authApi.login(data);
 
-        // Dispatch signIn — stores tokens in Redux state + storage layer
-        dispatch(signIn({ accessToken, refreshToken }));
-
-        // 2. Fetch current user profile
+        // 2. Fetch current user profile (using session cookie)
         const userRes = await authApi.getCurrentUser();
         const profile = userRes.data;
 
         // Update TanStack Query cache
         queryClient.setQueryData(['user', 'me'], profile);
 
-        // Dispatch setUser — stores user in Redux state + storage layer
+        // Dispatch setUser
         dispatch(setUser(profile));
 
         return profile;
@@ -68,10 +63,8 @@ export const useLogout = () => {
   const logout = async () => {
     dispatch(setLoading(true));
     try {
-      const refreshToken = storage.getString(StorageKeys.refreshToken);
-      if (refreshToken) {
-        await request.post('/auth/logout', { refreshToken });
-      }
+      // The server will rely on the session cookie to identify and clear the session.
+      await request.post('/auth/logout');
     } catch (error) {
       console.error('Logout failed:', error);
     } finally {

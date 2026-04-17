@@ -10,5 +10,6 @@
     "heroSubtitle": "Streamline HR processes, track employee performance, and build a better workplace — all in one platform.",
     "teamManagement": "Team Management",
     "analytics": "Analytics",
-    "secure": "Secure"
+    "secure": "Secure",
+    "signInWithKeycloak": "Sign in with Keycloak"
 }
